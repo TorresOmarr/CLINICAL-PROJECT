@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -18,6 +18,10 @@
     <ProjectReference Include="..\CLINICAL.Application.Dtos\CLINICAL.Application.Dtos.csproj" />
     <ProjectReference Include="..\CLINICAL.Application.Interface\CLINICAL.Application.Interface.csproj" />
     <ProjectReference Include="..\CLINICAL.Domain\CLINICAL.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\Analysis\Commands\" />
   </ItemGroup>
 
 </Project>
