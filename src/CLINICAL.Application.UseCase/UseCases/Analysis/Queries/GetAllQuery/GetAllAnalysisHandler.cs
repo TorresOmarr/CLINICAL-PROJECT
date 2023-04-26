@@ -16,7 +16,12 @@ namespace CLINICAL.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery
         private readonly IAnalysisRepository _analysisRepository;
         private readonly IMapper _mapper;
 
+        public GetAllAnalysisHandler(IAnalysisRepository analysisRepository, IMapper mapper)
+        {
+            _analysisRepository = analysisRepository;
+            _mapper = mapper;
 
+        }
         public async Task<BaseResponse<IEnumerable<GetAllAnalysisResponseDto>>> Handle(GetAllAnalysisQuery request, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<IEnumerable<GetAllAnalysisResponseDto>>();
@@ -27,7 +32,7 @@ namespace CLINICAL.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery
 
                 if(analysis is not null)
                 {
-                    response.isSucces = true;
+                    response.IsSucces = true;
                     response.Data = _mapper.Map<IEnumerable<GetAllAnalysisResponseDto>>(analysis);
                     response.Message = "Consulta Exitosa!";
                 }
@@ -35,7 +40,7 @@ namespace CLINICAL.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery
             }
             catch (Exception ex)
             {
-                response.isSucces =false;   
+                response.IsSucces =false;   
                 response.Message = ex.Message;
             }
 

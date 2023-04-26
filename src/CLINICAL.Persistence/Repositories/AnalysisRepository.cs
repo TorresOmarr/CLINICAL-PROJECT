@@ -19,6 +19,7 @@ namespace CLINICAL.Persistence.Repositories
             _context = context;
         }
 
+
         public async Task<IEnumerable<Analysis>> ListAnalysis()
         {
             using var connection = _context.CreateConnection;
@@ -29,6 +30,19 @@ namespace CLINICAL.Persistence.Repositories
 
             return analisys;
 
+        }
+        public async Task<Analysis> AnalysisById(int analysisId)
+        {
+            using var connection = _context.CreateConnection;
+
+            var query = "uspAnalysisById";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("AnalysisId", analysisId);
+
+            var analisys = await connection
+                            .QuerySingleOrDefaultAsync<Analysis>(query, param: parameters, commandType: CommandType.StoredProcedure);
+            return analisys;
         }
     }
 }

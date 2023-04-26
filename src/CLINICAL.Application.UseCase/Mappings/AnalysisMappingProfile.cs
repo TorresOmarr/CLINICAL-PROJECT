@@ -10,6 +10,8 @@ namespace CLINICAL.Application.UseCase.Mappings
         {
             CreateMap<Analysis, GetAllAnalysisResponseDto>()
                 .ForMember(x => x.StateAnalysis, x => x.MapFrom(x => x.State == 1 ? "Activo" : "Inactivo"));
+
+            CreateMap<Analysis, GetAnalysisiByIdResponseDto>().ReverseMap();
         }
     }
 }
