@@ -44,5 +44,38 @@ namespace CLINICAL.Persistence.Repositories
                             .QuerySingleOrDefaultAsync<Analysis>(query, param: parameters, commandType: CommandType.StoredProcedure);
             return analisys;
         }
+
+        public async Task<bool> AnalysisRegister(Analysis anylysis)
+        {
+            using var connection = _context.CreateConnection;
+
+            var query = "uspAnalysisRegister";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Name", anylysis.Name);
+            parameters.Add("State", 1);
+            parameters.Add("AuditCreateDate", DateTime.Now);
+
+            var recordsAffected = await connection
+                                    .ExecuteAsync(query, param:parameters, commandType: CommandType.StoredProcedure);
+
+            return recordsAffected > 0;
+
+        }
+
+        public async Task<bool> AnalysisEdit(Analysis anylysis)
+        {
+            using var connection = _context.CreateConnection;
+
+            var query = "uspAnalysisEdit";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("AnalysisId", anylysis.AnalysisId);
+            parameters.Add("Name", anylysis.AnalysisId);
+
+            var recordsAffected = await connection.ExecuteAsync(query, param: parameters, commandType: CommandType.StoredProcedure);
+
+            return recordsAffected > 0;
+        }
     }
 }
